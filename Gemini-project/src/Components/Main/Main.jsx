@@ -6,7 +6,12 @@ import { useContext } from 'react'
 const Main = () =>{
 
 const {onSent,recentPrompt,showResult,loading,resultData,setInput,input} = useContext(Context)
-
+const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+        onSent();
+        setInput("")
+    }
+};
     return (
         <div  className='main'>
             <div className='nav'>
@@ -65,7 +70,7 @@ const {onSent,recentPrompt,showResult,loading,resultData,setInput,input} = useCo
 
                 <div className='main-bottom'>
                     <div className='search-box'>
-                        <input onChange={(e)=>setInput(e.target.value)} value={input} type="text" placeholder='Enter a prompt here'/>
+                        <input onKeyDown={handleKeyDown} onChange={(e)=>setInput(e.target.value)} value={input} type="text" placeholder='Enter a prompt here'/>
                         <div>
                             <img src={assets.gallery_icon} alt=""></img>
                             <img src={assets.mic_icon} alt=""></img>
